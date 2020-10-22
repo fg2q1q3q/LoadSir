@@ -54,7 +54,9 @@ public class LoadService<T> {
     public void showCallback(Class<? extends Callback> callback) {
         loadLayout.showCallback(callback);
     }
-
+    public void showCallback(Class<? extends Callback> callback,int flagCode) {
+        loadLayout.showCallback(callback);
+    }
     public void showWithConvertor(T t) {
         if (convertor == null) {
             throw new IllegalArgumentException("You haven't set the Convertor.");
