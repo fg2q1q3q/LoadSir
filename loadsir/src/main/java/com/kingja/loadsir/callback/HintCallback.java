@@ -46,7 +46,7 @@ public class HintCallback extends Callback {
     }
 
     @Override
-    protected void onViewCreate(Context context, View view) {
+    protected void onViewCreate(Context context, View view,int flagCode) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER;
