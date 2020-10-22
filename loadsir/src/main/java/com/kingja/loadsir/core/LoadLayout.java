@@ -61,13 +61,20 @@ public class LoadLayout extends FrameLayout {
             callbacks.put(callback.getClass(), callback);
         }
     }
-
+    public void showCallback(final Class<? extends Callback> callback,int flagCode) {
+        checkCallbackExist(callback);
+        if (LoadSirUtil.isMainThread()) {
+            showCallbackView(callback,flagCode);
+        } else {
+            postToMainThread(callback,flagCode);
+        }
+    }
     public void showCallback(final Class<? extends Callback> callback) {
         checkCallbackExist(callback);
         if (LoadSirUtil.isMainThread()) {
-            showCallbackView(callback);
+            showCallbackView(callback,0);
         } else {
-            postToMainThread(callback);
+            postToMainThread(callback,0);
         }
     }
 
@@ -75,16 +82,16 @@ public class LoadLayout extends FrameLayout {
         return curCallback;
     }
 
-    private void postToMainThread(final Class<? extends Callback> status) {
+    private void postToMainThread(final Class<? extends Callback> status,int flagCode) {
         post(new Runnable() {
             @Override
             public void run() {
-                showCallbackView(status);
+                showCallbackView(status,0);
             }
         });
     }
 
-    private void showCallbackView(Class<? extends Callback> status) {
+    private void showCallbackView(Class<? extends Callback> status,int flagCode) {
         if (preCallback != null) {
             if (preCallback == status) {
                 return;
@@ -101,6 +108,7 @@ public class LoadLayout extends FrameLayout {
                     successCallback.show();
                 } else {
                     successCallback.showWithCallback(callbacks.get(key).getSuccessVisible());
+                    callbacks.get(key).setFlagCode(flagCode);
                     View rootView = callbacks.get(key).getRootView();
                     addView(rootView);
                     callbacks.get(key).onAttach(context, rootView);
