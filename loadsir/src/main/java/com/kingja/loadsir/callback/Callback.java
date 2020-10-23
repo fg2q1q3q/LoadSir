@@ -65,7 +65,7 @@ public abstract class Callback implements Serializable {
                 }
             }
         });
-        onViewCreate(context, rootView,flagCode);
+        onViewCreate(context, rootView,flagCode,onReloadListener);
         return rootView;
     }
 
@@ -134,7 +134,7 @@ public abstract class Callback implements Serializable {
      *
      * @since 1.2.2
      */
-   protected void onViewCreate(Context context, View view,int flagCode) {
+   protected void onViewCreate(Context context, View view,int flagCode, OnReloadListener onReloadListener) {
     }
 
     /**
