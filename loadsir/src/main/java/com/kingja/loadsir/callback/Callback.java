@@ -21,9 +21,9 @@ public abstract class Callback implements Serializable {
     private Context context;
     private OnReloadListener onReloadListener;
     private boolean successViewVisible;
-    private int flagCode;
+    private Object flagCode;
 
-    public void setFlagCode(int flagCode) {
+    public void setFlagCode(Object flagCode) {
         this.flagCode = flagCode;
     }
     public Callback() {
@@ -134,7 +134,7 @@ public abstract class Callback implements Serializable {
      *
      * @since 1.2.2
      */
-   protected void onViewCreate(Context context, View view,int flagCode,OnReloadListener onReloadListener) {
+   protected void onViewCreate(Context context, View view,Object flagCode,OnReloadListener onReloadListener) {
     }
 
     /**
