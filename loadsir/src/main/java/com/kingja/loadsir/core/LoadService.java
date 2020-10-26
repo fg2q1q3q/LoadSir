@@ -39,7 +39,7 @@ public class LoadService<T> {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                if (defalutCallback != null) {
+                if (loadLayout.getCurrentCallback()!=null&&defalutCallback != null) {
                     loadLayout.showCallback(defalutCallback);
                 }
             }
