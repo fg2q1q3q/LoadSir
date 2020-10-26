@@ -55,7 +55,7 @@ public class LoadService<T> {
     public void showCallback(Class<? extends Callback> callback) {
         loadLayout.showCallback(callback);
     }
-    public void showCallback(Class<? extends Callback> callback,int flagCode) {
+    public void showCallback(Class<? extends Callback> callback,Object flagCode) {
         loadLayout.showCallback(callback,flagCode);
     }
     public void showWithConvertor(T t) {
