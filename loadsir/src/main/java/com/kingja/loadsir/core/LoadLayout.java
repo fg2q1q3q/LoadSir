@@ -64,7 +64,7 @@ public class LoadLayout extends FrameLayout {
             callbacks.put(callback.getClass(), callback);
         }
     }
-    public synchronized void showCallback(final Class<? extends Callback> callback,int flagCode) {
+    public synchronized void showCallback(final Class<? extends Callback> callback,Object flagCode) {
         checkCallbackExist(callback);
         if (curCallback!=null&&callback== defaultCallback){
             return;
@@ -76,23 +76,14 @@ public class LoadLayout extends FrameLayout {
         }
     }
     public synchronized void showCallback(final Class<? extends Callback> callback) {
-        Log.i("zxl","showCallback=");
-        checkCallbackExist(callback);
-        if (curCallback!=null&&callback== defaultCallback){
-            return;
-        }
-        if (LoadSirUtil.isMainThread()) {
-            showCallbackView(callback,0);
-        } else {
-            postToMainThread(callback,0);
-        }
+         showCallback(callback,null);
     }
 
     public Class<? extends Callback> getCurrentCallback() {
         return curCallback;
     }
 
-    private void postToMainThread(final Class<? extends Callback> status,int flagCode) {
+    private void postToMainThread(final Class<? extends Callback> status,Object flagCode) {
         post(new Runnable() {
             @Override
             public void run() {
@@ -101,7 +92,7 @@ public class LoadLayout extends FrameLayout {
         });
     }
 
-    private void showCallbackView(Class<? extends Callback> status,int flagCode) {
+    private void showCallbackView(Class<? extends Callback> status,Object flagCode) {
         Log.i("zxl","showCallbackView="+status);
         if (preCallback != null) {
             if (preCallback == status) {
