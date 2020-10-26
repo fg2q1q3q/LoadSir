@@ -76,6 +76,7 @@ public class LoadLayout extends FrameLayout {
         }
     }
     public synchronized void showCallback(final Class<? extends Callback> callback) {
+        Log.i("zxl","showCallback=");
         checkCallbackExist(callback);
         if (curCallback!=null&&callback== defaultCallback){
             return;
@@ -101,6 +102,7 @@ public class LoadLayout extends FrameLayout {
     }
 
     private void showCallbackView(Class<? extends Callback> status,int flagCode) {
+        Log.i("zxl","showCallbackView="+status);
         if (preCallback != null) {
             if (preCallback == status) {
                 return;
@@ -119,6 +121,7 @@ public class LoadLayout extends FrameLayout {
                     successCallback.showWithCallback(callbacks.get(key).getSuccessVisible());
                     callbacks.get(key).setFlagCode(flagCode);
                     View rootView = callbacks.get(key).getRootView();
+                    Log.i("zxl","addView=");
                     addView(rootView);
                     callbacks.get(key).onAttach(context, rootView);
                 }
