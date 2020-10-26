@@ -36,10 +36,11 @@ public class LoadService<T> {
                 loadLayout.setupCallback(callback);
             }
         }
+        loadLayout.setDefaultCallback(defalutCallback);
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                if (loadLayout.getCurrentCallback()!=null&&defalutCallback != null) {
+                if (defalutCallback != null) {
                     loadLayout.showCallback(defalutCallback);
                 }
             }
