@@ -30,7 +30,10 @@ public class LoadLayout extends FrameLayout {
     private Class<? extends Callback> preCallback;
     private Class<? extends Callback> curCallback;
     private static final int CALLBACK_CUSTOM_INDEX = 1;
-
+    private Class<? extends Callback> defaultCallback;
+    public void setDefaultCallback(Class<? extends Callback> defaultCallback) {
+        this.defaultCallback = defaultCallback;
+    }
     public LoadLayout(@NonNull Context context) {
         super(context);
     }
@@ -61,16 +64,22 @@ public class LoadLayout extends FrameLayout {
             callbacks.put(callback.getClass(), callback);
         }
     }
-    public void showCallback(final Class<? extends Callback> callback,int flagCode) {
+    public synchronized void showCallback(final Class<? extends Callback> callback,int flagCode) {
         checkCallbackExist(callback);
+        if (curCallback!=null&&callback== defaultCallback){
+            return;
+        }
         if (LoadSirUtil.isMainThread()) {
             showCallbackView(callback,flagCode);
         } else {
             postToMainThread(callback,flagCode);
         }
     }
-    public void showCallback(final Class<? extends Callback> callback) {
+    public synchronized void showCallback(final Class<? extends Callback> callback) {
         checkCallbackExist(callback);
+        if (curCallback!=null&&callback== defaultCallback){
+            return;
+        }
         if (LoadSirUtil.isMainThread()) {
             showCallbackView(callback,0);
         } else {
